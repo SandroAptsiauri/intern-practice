@@ -28,7 +28,7 @@ const PhotoItem: React.FC<TPhotoItemProps> = ({
 
   return (
     <>
-      <div key={id} className="image-item" onClick={openModal}>
+      <div style={{ cursor: "pointer" }} key={id} className="image-item" onClick={openModal}>
         <div className="image-container">
           <img src={urls?.small} alt={description} />
         </div>

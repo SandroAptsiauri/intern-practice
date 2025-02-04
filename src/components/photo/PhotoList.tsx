@@ -10,17 +10,17 @@ const PhotoList: React.FC<TPhotoListProps> = ({ photos }) => {
   return (
     <div>
       {photos?.map(({ description, urls, id, views, likes }) => (
-        <div className="photo-cursor">
-        <PhotoItem
-          key={id}
-          description={description  || "No description"}
-          urls={urls}
-          id={id}
-          fullUrl={urls.full}
-          downloadLink={urls.raw}
-          views={views || 0}
-          likes={likes || 0}
-        />
+        <div key={id}>
+          <PhotoItem
+            key={id}
+            description={description || "No description"}
+            urls={urls}
+            id={id}
+            fullUrl={urls.full}
+            downloadLink={urls.raw}
+            views={views || 0}
+            likes={likes || 0}
+          />
         </div>
       ))}
     </div>

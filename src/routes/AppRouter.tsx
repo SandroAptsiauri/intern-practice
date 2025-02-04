@@ -1,15 +1,18 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import HistoryPage from "../pages/HistoryPage";
 import HomePage from "../pages/HomePage";
-
+import Navbar from "../components/navbar/Navbar";
 
 const AppRouter: React.FC = () => {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/history" element={<HistoryPage />} />
-    </Routes>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/history" element={<HistoryPage />} />
+      </Routes>
+    </Router>
   );
 };
 
