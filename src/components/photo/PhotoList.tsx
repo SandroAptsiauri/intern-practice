@@ -6,10 +6,11 @@ type TPhotoListProps = {
   photos: TPhoto[] | undefined;
 };
 
-const PhotoList: React.FC<TPhotoListProps> = ({ photos }) => {
+const PhotoList: React.FC<TPhotoListProps> = ({ photos = [] }) => {
+  const uniquePhotos = Array.from(new Map(photos.map(photo => [photo.id, photo])).values());
   return (
     <div>
-      {photos?.map(({ description, urls, id, views, likes }) => (
+      {uniquePhotos?.map(({ description, urls, id, views, likes }) => (
         <div key={id}>
           <PhotoItem
             key={id}

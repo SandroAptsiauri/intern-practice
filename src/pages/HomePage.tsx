@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useFetchPhotos from "../hooks/queries/useFetchPhotos";
 import PhotoList from "../components/photo/PhotoList";
+import usePageBottom from "../hooks/usePageBottom";
 
 const HomePage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -9,7 +10,21 @@ const HomePage: React.FC = () => {
 
   const [inputValue, setInputValue] = useState(searchTermFromUrl);
   const [search, setSearch] = useState(searchTermFromUrl);
-  const { data: photos, isLoading, error } = useFetchPhotos(search);
+  const {
+    photos,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useFetchPhotos(search);
+  const bottom = usePageBottom()
+  useEffect(() => {
+    if (bottom && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage(); 
+    }
+  }, [bottom, fetchNextPage, hasNextPage, isFetchingNextPage]);
+
 
  
   const [history, setHistory] = useState<string[]>(
@@ -48,7 +63,7 @@ const HomePage: React.FC = () => {
       />
 
       {isLoading && <h1>Loading...</h1>}
-      {error && <h2>{error.message}</h2>}
+      {isError && <h2>{isError}</h2>}
       <PhotoList photos={photos} />
     </div>
   );
