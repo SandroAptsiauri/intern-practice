@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ITEMS_PER_PAGE = 10; // Load 10 items at a time
+const ITEMS_PER_PAGE = 10;
 
 const HistoryPage: React.FC = () => {
   const navigate = useNavigate();
